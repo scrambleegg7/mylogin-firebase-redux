@@ -1,38 +1,63 @@
+import React, { Component } from 'react';
+import './App.css';
 
-import React from "react";
+import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
 
-import { Route, Switch } from "react-router-dom";
-import { connect } from "react-redux";
-
-import ProtectedRoute from "./components/ProtectedRoute";
-import Home from "./components/HomeComponent";
-import Login from "./components/LoginComponent";
-import SignUp from "./components/SignUpComponents";
+import { connect } from 'react-redux';
+import { makeLoginTest } from './store/actions/authActions';
 
 
-function App(props) {
-  const { isAuthenticated, isVerifying } = props;
-  return (
-    <Switch>
-      <ProtectedRoute
-        exact
-        path="/"
-        component={Home}
-        isAuthenticated={isAuthenticated}
-        isVerifying={isVerifying}
-      />
-      <Route path="/login" component={Login} />
-      <Route path="/signup" component={SignUp} />
-      
-    </Switch>
-  );
+class App extends Component {
+
+    constructor(props) {
+        super(props);
+    }
+
+    handleSubmit = (e) => {
+        e.preventDefault();
+        console.log("App button.", this.state);
+        this.props.makeLoginTest(this.state)
+    }
+
+
+    render () {
+
+        console.log(this.props)
+        return (
+            <div className="container">
+                <form onSubmit={this.handleSubmit} className="white">
+                    <h5 className="grey-text text-darken-3">SignUp</h5>
+                    
+                    <div className="input-field">
+                        <button className="btn blue lighten-1 z-depth-0">button</button>
+                    </div>
+                    
+                </form>
+            </div>
+
+            )
+    }
+
+
+
+    
 }
 
-function mapStateToProps(state) {
-  return {
-    isAuthenticated: state.auth.isAuthenticated,
-    isVerifying: state.auth.isVerifying
-  };
+
+const mapStateToProps = (state) => {
+    return {
+        auth: state.firebase.auth,
+        authError: state.auth.authError
+
+    }
 }
 
-export default connect(mapStateToProps)(App);
+
+const mapDispatchToProps = (dispatch) => {
+    return {
+        makeLoginTest: (newUser) => dispatch( makeLoginTest(newUser) )
+    }
+}
+
+
+export default connect(mapStateToProps, mapDispatchToProps)(App);
