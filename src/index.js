@@ -5,6 +5,7 @@ import './index.css';
 import App from './App';
 import * as serviceWorker from './serviceWorker';
 
+// react-redux-firebase 3.0 implmentation 
 
 import { createStore, applyMiddleware, compose } from 'redux';
 import rootReducer from './store/reducers/rootReducer';
@@ -25,7 +26,7 @@ const myconfig = {
   }
 
 const store = createStore(rootReducer, 
-        applyMiddleware(  thunk.withExtraArgument( getFirebase, getFirestore  ) ), 
+        applyMiddleware(  thunk.withExtraArgument(  getFirebase ) ), 
    //     reduxFirestore(fbConfig), 
    //     reactReduxFirebase(fbConfig, { useFirestoreForProfile: true, userProfile: 'users',   attachAuthIsReady: true} )
    //     )

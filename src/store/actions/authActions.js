@@ -1,6 +1,7 @@
-//import { useFirebase } from 'react-redux-firebase'
+import { withFirestore } from 'react-redux-firebase'
+import { useFirestore } from 'react-redux-firebase'
 
-
+//import   firebase  from '../../config/fbConfig';
 
 export const signIn = (credentials) => {
 
@@ -56,10 +57,17 @@ export const signOut = () => {
 
 export const signUp = (newUser) => {
 
-    return (dispatch , getState, { getFirebase, getFirestore } ) => {
+    console.log("authAction signUp", newUser)
+    //console.log("authAction signUp props", props)
+
+    return (dispatch , getState, getFirebase, getFirestore  ) => {
 
         const firebase = getFirebase();
-        const firestore = getFirestore();
+        
+        // react-redux-firebase v3.0.0 workaround 
+        // https://github.com/prescottprue/react-redux-firebase/issues/785
+
+        const firestore = getFirebase().firestore();
         const REACT_APP_CONFIRMATION_EMAIL_REDIRECT = "http://localhost:3000"
 
         firebase.auth().createUserWithEmailAndPassword(
