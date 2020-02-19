@@ -5,7 +5,7 @@ import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
 import { connect } from "react-redux";
 
 
-
+import PassForget from "./components/PassForgetComponent";
 import SignUp from "./components/SignUpComponent";
 import SignIn from "./components/SignInComponent";
 import Home from "./components/HomeComponent";
@@ -24,7 +24,9 @@ class App extends Component {
         return (
             <Router>
                 <Switch>
-                    <Route exact path="/" component={Home} />    
+                    <Route exact path="/" component={Home} /> 
+
+                    <Route path="/passforget" component={PassForget} />    
 
                     <Route path="/signup" component={SignUp} />    
                     <Route path="/signin" component={SignIn} />    

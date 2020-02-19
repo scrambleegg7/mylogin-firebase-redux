@@ -4,7 +4,7 @@ import React, { Component } from "react";
 import { connect } from "react-redux";
 import { Redirect } from "react-router-dom";
 
-import { signIn } from '../store/actions/authActions';
+import { passForget } from '../store/actions/authActions';
 
 import { withStyles } from "@material-ui/styles";
 
@@ -45,7 +45,7 @@ const styles = () => ({
     }
 });
 
-class SignIn extends Component {
+class PassForget extends Component {
 
     state = {
         email: '',
@@ -67,14 +67,14 @@ class SignIn extends Component {
     handleSubmit = (e) => {
 
         console.log("SingIn submit.",this.state)
-        this.props.signIn(this.state)
+        this.props.passForget(this.state)
     //dispatch(loginUser(email, password));
     };
 
     render() {
         const { classes, auth, authError } = this.props;
-        //console.log("Signin auth",auth)
-        //console.log("Signin authError",authError)
+        console.log("Signin auth",auth)
+        console.log("Signin authError",authError)
         
         if (auth.uid) {
             return <Redirect to="/" />;
@@ -97,16 +97,6 @@ class SignIn extends Component {
                         name="email"
                         onChange={this.handleChange}
                     />
-                    <TextField
-                        variant="outlined"
-                        margin="normal"
-                        fullWidth
-                        name="password"
-                        label="Password"
-                        type="password"
-                        id="password"
-                        onChange={this.handleChange}
-                    />
                     <Button
                         type="button"
                         fullWidth
@@ -115,16 +105,12 @@ class SignIn extends Component {
                         className={classes.submit}
                         onClick={this.handleSubmit}
                     >
-                        Sign In
+                        Password Reset
                     </Button>
                     <div className="red-text center">{ authError ?  <p>  {authError}  </p> : null      }</div>
-                    <Link href="/signup" variant="body2">
-                        初めての方はこちらから
-                        </Link>
-                    <Link href="/passforget" variant="body2">
-                        パスワードを忘れたの！！！
-                        </Link>
-
+                    <Link href="/signin" variant="body2">
+                        パスワード本当はわかるんですよね？
+                    </Link>
                     </Paper>
                 </Container>
             );
@@ -134,7 +120,7 @@ class SignIn extends Component {
 
 const mapDispatchToProps = (dispatch) => {
     return {
-        signIn: (newUser) => dispatch( signIn(newUser) )
+        passForget: (newUser) => dispatch( passForget(newUser) )
         //signUp: (newUser) => signUp(ownProps, dispatch, newUser) 
     }
 }
@@ -147,5 +133,5 @@ const mapStateToProps = (state) => {
     }
 }
 
-export default withStyles(styles)(connect(mapStateToProps, mapDispatchToProps)(SignIn));
+export default withStyles(styles)(connect(mapStateToProps, mapDispatchToProps)(PassForget));
 

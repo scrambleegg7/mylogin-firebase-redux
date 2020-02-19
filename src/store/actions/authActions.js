@@ -44,6 +44,26 @@ export const makeLoginTest = (newUser) => {
 
 }
 
+export const passForget = (newUser) => {
+
+    return (dispatch , getState,  getFirebase  ) => {
+
+        const firebase = getFirebase();
+
+        firebase.auth().sendPasswordResetEmail(newUser.email)
+        .then( () =>
+            dispatch( { type: 'PASSWORDRESET_SUCCESS' } )
+        )
+        .catch( (err) => {
+            dispatch( { type: 'PASSWORDRESET_ERROR', err });
+        })
+
+        
+    }
+}
+
+
+
 export const signOut = () => {
 
     return (dispatch , getState,  getFirebase  ) => {

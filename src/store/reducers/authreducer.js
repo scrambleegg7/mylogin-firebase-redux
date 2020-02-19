@@ -38,7 +38,22 @@ const authReducer = (state = InitState, action ) => {
                 ...state,
                 authError: action.err.message
             }
-                
+
+        case 'PASSWORDRESET_SUCCESS':
+            console.log("password reset success from authreducer.")
+            return {
+                ...state,
+                authError: null
+            }
+    
+        case 'PASSWORDRESET_ERROR':
+            console.log("password reset error from authreducer.")
+            return {
+                ...state,
+                authError: action.err.message
+            }
+    
+
 
 
         default:
