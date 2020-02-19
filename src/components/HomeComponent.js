@@ -1,32 +1,48 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
-import { logoutUser } from "../actions/ActionCreators";
+
+import { Route, Redirect } from "react-router-dom";
+
+import { signOut } from '../store/actions/authActions';
 
 class Home extends Component {
-  handleLogout = () => {
-    const { dispatch } = this.props;
-    dispatch(logoutUser());
-  };
-  render() {
-    const { isLoggingOut, logoutError } = this.props;
+    
+    handleLogout = () => {
+        //const { dispatch } = this.props;
+        //dispatch(logoutUser());
+        this.props.signOut();
+    };
 
-    return (
-      <div>
-        <h1>This is your app's protected area.</h1>
-        <p>Any routes here will also be protected</p>
-        <button onClick={this.handleLogout}>Logout</button>
-        {isLoggingOut && <p>Logging Out....</p>}
-        {logoutError && <p>Error logging out</p>}
-      </div>
-    );
-  }
+    render() {
+        const { auth, authError } = this.props;
+
+        if (!auth.uid) {
+            return <Redirect to="/signin" />;
+        }    
+        return (
+            <div>
+                <h1>This is your app's protected area.</h1>
+                <p>Any routes here will also be protected</p>
+                
+                <button onClick={this.handleLogout}>Logout</button>
+            </div>
+        );
+    }
 }
 
-function mapStateToProps(state) {
-  return {
-    isLoggingOut: state.auth.isLoggingOut,
-    logoutError: state.auth.logoutError
-  };
+const mapDispatchToProps = (dispatch) => {
+    return {
+        signOut: () => dispatch( signOut() )
+    }
 }
 
-export default connect(mapStateToProps)(Home);
+
+const mapStateToProps = (state) => {
+    return {
+        auth: state.firebase.auth,
+        authError: state.auth.authError
+
+    }
+}
+
+export default connect(mapStateToProps,mapDispatchToProps)(Home);

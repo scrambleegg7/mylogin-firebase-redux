@@ -79,17 +79,17 @@ class SignUp extends Component {
     };
 
     render() {
-        const { classes, loginError, isAuthenticated } = this.props;
-
+        const { classes, auth, authError } = this.props;
+        console.log( "signup render:", this.props )
         const isInValid = this.state.password !== this.state.password2;
 
-        if (isAuthenticated) {
+        if (authError) {
             return <Redirect to="/" />;
         } else {
             return (
             <Container component="main" maxWidth="xs">
-                <Paper className={classes.paper}>
-                <Avatar className={classes.avatar}>
+                <Paper className={classes.paper}> 
+                <Avatar className={classes.avatar} >
                     <LockOutlinedIcon />
                 </Avatar>
                 <Typography component="h1" variant="h5">
@@ -162,14 +162,13 @@ class SignUp extends Component {
                     fullWidth
                     variant="contained"
                     color="primary"
-                    className={classes.submit}
                     onClick={this.handleSubmit}
-                >
+                    className={classes.submit}>
                     Sign Up
                 </Button>
                 <Grid container justify="flex-end">
                 <Grid item>
-                    <Link href="/login" variant="body2">
+                    <Link href="/signin" variant="body2">
                     Already have an account? Sign in
                     </Link>
                 </Grid>

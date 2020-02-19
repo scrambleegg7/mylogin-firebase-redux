@@ -46,7 +46,7 @@ export const makeLoginTest = (newUser) => {
 
 export const signOut = () => {
 
-    return (dispatch , getState, { getFirebase } ) => {
+    return (dispatch , getState,  getFirebase  ) => {
 
         const firebase = getFirebase();
 

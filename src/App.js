@@ -6,8 +6,9 @@ import { connect } from "react-redux";
 
 
 
-import SignUp from "./components/SignUpComponents";
-
+import SignUp from "./components/SignUpComponent";
+import SignIn from "./components/SignInComponent";
+import Home from "./components/HomeComponent";
 
 class App extends Component {
 
@@ -17,11 +18,17 @@ class App extends Component {
 
     render () {
 
-        console.log(this.props)
+        
+
+        console.log("Apps props",this.props)
         return (
             <Router>
                 <Switch>
-                    <Route path="/signup" component={SignUp} />            
+                    <Route exact path="/" component={Home} />    
+
+                    <Route path="/signup" component={SignUp} />    
+                    <Route path="/signin" component={SignIn} />    
+
                 </Switch>
             </Router>      
         )
