@@ -1,3 +1,47 @@
+export const editProject = (project) => {
+
+    console.log("deleteProject from projectActions : ", project.key)
+
+    return (dispatch , getState,  getFirebase     ) => {
+        // make async 
+        // const firestore = getFirestore();
+        const firestore = getFirebase().firestore();
+        const profile = getState().firebase.profile;
+        const authorid = getState().firebase.auth.uid;
+
+        firestore.collection('projects').doc(project.key).set(
+            {
+                title:project.title,
+                content:project.content
+            }
+        )
+        .then( () => {
+            console.log("Board successfully edited."); 
+            dispatch(
+                {
+                    type: 'EDIT_PROJECT',
+                    project
+                }
+            )
+        })
+        .catch( (err) => {
+            dispatch( 
+                {
+                    type: 'EDIT_PROJECT_ERROR',
+                    err
+                }
+            )
+        })
+
+    }
+
+
+}
+
+
+
+
+
 
 export const deleteProject = (project) => {
 

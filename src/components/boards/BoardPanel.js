@@ -13,7 +13,6 @@ class BoardPanel extends Component {
     }
 
 
-
     render() {
 
         const {projects, auth} = this.props;
@@ -21,7 +20,7 @@ class BoardPanel extends Component {
         return (
             <div>
                 <h1>BoardPanel</h1>
-
+                <Link to="/create">Add Board</Link>
                 <table className="table table-stripe">
                     <thead>
                         <tr>

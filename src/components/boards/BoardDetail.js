@@ -16,8 +16,14 @@ class BoardDetail extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            id:''
+            key: null,
         }
+    }
+
+    componentDidMount() {
+        console.log("BoardDetail componentdidmount")
+        this.setState( { key: this.props.match.params.id })
+
     }
 
     handleDelete = (e) => {
@@ -30,15 +36,8 @@ class BoardDetail extends Component {
     render() {
         const { project, auth } = this.props;
 
-        console.log("props match params",this.props.match.params);
-        //const id = props.match.params.id;
-
-
-
-        //console.log("project props from BoardDetail",{project});
-
         if (!auth.uid) return <Redirect to='/signin' />
-
+        console.log("state after componentdidmount of BoardDetail.", this.state)
         if (project) {
             return (
                 
@@ -56,7 +55,8 @@ class BoardDetail extends Component {
                             <div> { moment(  project.createdAt.toDate().toISOString() ).format("YYYY-MMM-DD")  }  </div>
                         </div>
                     </div>
-                    <Link className="btn btn-success"  to={'/edit/' + project.id }  >Edit</Link>
+                    <Link to={'/edit/' + this.state.key }  >Edit</Link>
+                    
                     <button onClick={this.handleDelete} >Delete</button>
                 </div>
             )
