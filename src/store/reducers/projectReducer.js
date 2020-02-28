@@ -7,7 +7,6 @@ const InitState = {
       ]    
 }
 
-
 const projectReducer = (state = InitState, action ) => {
 
     switch(action.type) {
@@ -17,6 +16,13 @@ const projectReducer = (state = InitState, action ) => {
         case 'CREATE_PROJECT_ERROR':
             console.log("create_proeject_error from projectReducer ", action.err  )
             return state;
+        case 'DELETE_PROJECT':
+            console.log("delete_proeject from projectReducer ", action.project  )
+            return state;
+        case 'DELETE_PROJECT_ERROR':
+            console.log("delete_proeject_error from projectReducer ", action.err  )
+            return state;
+    
         default:
             return state;   
     }

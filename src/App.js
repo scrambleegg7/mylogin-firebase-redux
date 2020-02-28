@@ -4,7 +4,7 @@ import './App.css';
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
 import { connect } from "react-redux";
 
-
+import BoardDetail from './components/boards/BoardDetail';
 import PassForget from "./components/PassForgetComponent";
 import SignUp from "./components/SignUpComponent";
 import SignIn from "./components/SignInComponent";
@@ -25,6 +25,9 @@ class App extends Component {
             <Router>
                 <Switch>
                     <Route exact path="/" component={Home} /> 
+                    <Route path="/project/:id" component={BoardDetail} />
+                    
+
 
                     <Route path="/passforget" component={PassForget} />    
 

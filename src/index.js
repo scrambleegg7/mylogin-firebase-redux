@@ -14,7 +14,7 @@ import { Provider } from 'react-redux';
 
 import thunk from 'redux-thunk';
 // import firebase tools 
-import { reduxFirestore,   getFirestore } from 'redux-firestore';
+//import { reduxFirestore,   getFirestore } from 'redux-firestore';
 import { createFirestoreInstance } from 'redux-firestore'
 import { ReactReduxFirebaseProvider,  getFirebase } from 'react-redux-firebase';
 
