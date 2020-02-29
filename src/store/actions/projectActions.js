@@ -12,7 +12,11 @@ export const editProject = (project) => {
         firestore.collection('projects').doc(project.key).set(
             {
                 title:project.title,
-                content:project.content
+                content:project.content,
+                authorFirstName: profile.firstName,
+                authorLastName: profile.lastName,
+                authorId: authorid,
+                createdAt:new Date()                
             }
         )
         .then( () => {
@@ -37,11 +41,6 @@ export const editProject = (project) => {
 
 
 }
-
-
-
-
-
 
 export const deleteProject = (project) => {
 
