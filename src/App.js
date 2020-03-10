@@ -13,6 +13,8 @@ import SignUp from "./components/SignUpComponent";
 import SignIn from "./components/SignInComponent";
 import Home from "./components/HomeComponent";
 
+import Header from './components/menu/Header';
+
 class App extends Component {
 
     constructor(props) {
